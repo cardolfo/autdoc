@@ -25,6 +25,11 @@ gem 'puma', '~> 3.7'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+#A Pure ruby library to merge PDF files, number pages and maybe more... 
+gem 'combine_pdf'
+#Fast, Nimble PDF Writer for Ruby http://prawnpdf.org
+gem 'prawn'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
