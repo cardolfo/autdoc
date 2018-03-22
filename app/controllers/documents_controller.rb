@@ -1,35 +1,45 @@
 class DocumentsController < ApplicationController
 
-  
-  def path
-    "/home/tj.ce.gov.br/8880/Temp"
-  end
-
   def new_file
-    "#{path}/new.pdf"
+    "#{@path}/new.pdf"
   end
 
   def footer_file
-    "#{path}/footer.pdf"
+    "#{@path}/footer.pdf"
   end
 
   def new_file_with_footer
-    "#{path}/new_with_footer.pdf"
+    "#{@path}/new_with_footer.pdf"
   end
   
   def create
+
+    set_path
     
     file_content_encoded_base64 = document_params[:file]
 
     if file_content_encoded_base64 
       #file_name = document_params[:file_name]   
       file_content_decoded_base64 = Base64.decode64(file_content_encoded_base64)
+      create_directory
       file = save(file_content_decoded_base64)
       edit      
     end
   end
 
-  def save(file_content)    
+  def set_path
+    date_now = DateTime.now    
+    year = date_now.strftime "%Y"
+    month = date_now.strftime "%m"
+    day = date_now.strftime "%d"    
+    @path = "/opt/DADOS_SISTEMA/autdoc/documentos/#{year}/#{month}/#{day}"
+  end
+
+  def create_directory
+    FileUtils::mkdir_p @path 
+  end
+
+  def save(file_content)        
     File.open(new_file,"w:UTF-8") do |file|
       file.write(file_content.force_encoding("UTF-8"))              
     end
