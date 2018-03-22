@@ -1,5 +1,9 @@
 class DocumentsController < ApplicationController
 
+  def path_system
+    "/opt/DADOS_SISTEMA"
+  end
+
   def new_file
     "#{@path}/new.pdf"
   end
@@ -32,7 +36,7 @@ class DocumentsController < ApplicationController
     year = date_now.strftime "%Y"
     month = date_now.strftime "%m"
     day = date_now.strftime "%d"    
-    @path = "/opt/DADOS_SISTEMA/autdoc/documentos/#{year}/#{month}/#{day}"
+    @path = "#{path_system}/autdoc/documentos/#{year}/#{month}/#{day}"
   end
 
   def create_directory
